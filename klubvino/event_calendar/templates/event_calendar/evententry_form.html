@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+  {% load staticfiles %}
+  {% load widget_tweaks %}
+  {% block body_block %}
+  <div class="container">
+    <div class="jumbotron" id="myjumbotron">
+      <form method="POST">
+        {% csrf_token %}
+        <p id="registrationform">Naam: {{form.name}}</p>
+        <p id="registrationform">Datum en Tyd: {{form.date}}</p>
+        <p id="registrationform">Beskrywing:</p>
+        {{form.description|add_class:"form-control"}}
+        <p></p>
+        <p id="registrationform">Skrywer: {{form.created_by}}</p>
+        <p id="registrationform">Dateer deur: {{form.last_update_by}}</p>
+        <hr>
+        <input type="submit" class="btn btn-warning glyphicon glyphicon-plus" value=" Laai Gebeur">
+        <a href="{% url 'event_calendar:events' %}" class="btn btn-primary glyphicon glyphicon-step-backward" role="button"> Kanselleer</a>
+      </form>
+    </div>
+  </div>
+  <script src="{% static "JS/gebeure.js" %}"></script>
+  {% endblock %}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+  {% load staticfiles %}
+  {% block body_block %}
+  <div class="container">
+    <div class="jumbotron" id="myjumbotron">
+      {% if registered %}
+    <h2>Baie dankie, U is nou geregistreer!</h2>
+    <p>U kan nou in teken en al die funksies van die kuberblab geniet.</p>
+  {% else %}
+    <h2>Registreer asseblief hier!</h2>
+    <h4>Vul asseblief die form in:</h4>
+    <form id="myform" enctype="multipart/form-data" method="POST">
+      {% csrf_token %}
+      <p id="registrationform">Kubernaam: {{user_form.username}}</p>
+      <p id="registrationform">Naam: {{user_form.first_name}}</p>
+      <p id="registrationform">Van: {{user_form.last_name}}</p>
+      <p id="registrationform">e-pos: {{user_form.email}}</p>
+      <p id="registrationform">Wagwoord: {{user_form.password}}</p>
+      <p id="registrationform">Kiekie: {{profile_form.profile_pic}}</p>
+      <input type="submit" class="btn btn-primary" value="Registreer">
+    </form>
+  {% endif %}
+    </div>
+  </div>
+  <script src="{% static "JS/nuwelede.js" %}"></script>
+  {% endblock %}

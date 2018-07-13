@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+  {% load staticfiles %}
+  {% block body_block %}
+  <div class="container">
+    <div class="jumbotron" id="myjumbotron">
+      <h4>Resultate vir "{{mySearch}}"</h4>
+      <ol>
+        {% for wines in search_display %}
+        <li><a href="{{wines.wine_id}}">{{wines.name}}, {{wines.cellar}}, {{wines.year}}</a></li>
+        {% endfor %}
+      </ol>
+    </div>
+  </div>
+  <script src="{% static "JS/wyninfo.js" %}"></script>
+  {% endblock %}

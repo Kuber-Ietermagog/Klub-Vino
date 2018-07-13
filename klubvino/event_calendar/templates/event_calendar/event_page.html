@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+  {% load staticfiles %}
+  {% block body_block %}
+  <div class="container">
+    <button onclick="window.location='{% url 'event_calendar:create_event' %}'"type="button" class="btn btn-warning glyphicon glyphicon-plus event"> Nuwe</button>
+    <div class="row">
+      {% include 'event_calendar/_event_entry.html' %}
+    </div>
+  </div>
+  <script src="{% static "JS/gebeure.js" %}"></script>
+  {% endblock %}

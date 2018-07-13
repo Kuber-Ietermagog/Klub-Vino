@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+  {% load staticfiles %}
+  {% block body_block %}
+  <div class="container">
+    <button onclick="window.location='{% url 'winetasting:create_tasting' %}'"type="button" class="btn btn-warning glyphicon glyphicon-plus event"> Nuwe</button>
+    <div class="row">
+      {% include 'winetasting/_tasting_entry.html' %}
+    </div>
+  </div>
+  <script src="{% static "JS/tasting.js" %}"></script>
+  {% endblock %}

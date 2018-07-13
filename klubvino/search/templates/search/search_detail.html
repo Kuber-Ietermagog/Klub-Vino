@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+  {% load staticfiles %}
+  {% block body_block %}
+  <div class="container">
+    <div class="jumbotron" id="myjumbotron">
+      {% if wyn_goed.pics %}
+        <img src="{{ wyn_goed.pics.url }}" alt="no image" width="200" height="300">
+      {% else %}
+        <p>Geen Kiekie!</p>
+      {% endif %}
+      <p id="registrationform">Kultivar: {{wyn_goed.cultivar}}</p>
+      <p id="registrationform">Naam: {{wyn_goed.name}}</p>
+      <p id="registrationform">Kelder: {{wyn_goed.cellar}}</p>
+      <p id="registrationform">Jaar: {{wyn_goed.year}}</p>
+      <p id="registrationform">Prys: {{wyn_goed.price}}</p>
+      <p id="registrationform">Punt: {{wyn_goed.rating}}/10</p>
+      <a href="{% url 'wineinfo:update_wine' pk=wyn_goed.pk %}" class="btn btn-warning glyphicon glyphicon-edit" role="button"> Opdateer</a>
+      <a href="{% url 'wineinfo:delete_wine' pk=wyn_goed.pk %}" class="btn btn-danger glyphicon glyphicon-remove" role="button"> Verwyder</a>
+      <p></p>
+      <hr>
+      <button onclick="goBack()" class="btn btn-primary glyphicon glyphicon-step-backward"> Terug</button>
+    </div>
+  </div>
+  <script>
+    function goBack(){
+      window.history.back();
+    }
+  </script>
+  <script src="{% static "JS/wyninfo.js" %}"></script>
+  {% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+  {% load staticfiles %}
+  {% block body_block %}
+  <div class="container">
+    <div class="jumbotron" id="myjumbotron">
+      <h2>Voeg 'n wyn by:</h2>
+      <form enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        <p id="registrationform">Kultivar: {{form.cultivar}}</p>
+        <p id="registrationform">Kiekie: {{form.pics}}</p>
+        <p id="registrationform">Naam: {{form.name}}</p>
+        <p id="registrationform">Kelder: {{form.cellar}}</p>
+        <p id="registrationform">Jaar: {{form.year}}</p>
+        <p id="registrationform">Prys: {{form.price}}</p>
+        <p id="registrationform">Punt: {{form.rating}}</p>
+        <input type="submit" class="btn btn-warning glyphicon glyphicon-plus" value=" Laai Wyn">
+        <a href="{% url 'wineinfo:cultivar' %}" class="btn btn-primary glyphicon glyphicon-step-backward" role="button"> Kanselleer</a>
+      </form>
+    </div>
+  </div>
+  <script src="{% static "JS/wyninfo.js" %}"></script>
+  {% endblock %}

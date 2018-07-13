@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+  {% load staticfiles %}
+  {% block body_block %}
+  <div class="container">
+    <div class="jumbotron" id="myjumbotron">
+      {% for chats in myModel %}
+        <img src="{{ chats.profile_pic.url }}" width="50" height="50" alt=""><span id="dtstamp"> {{chats.timestamp}}</span>
+        <p></p>
+        <p id="chatlog">{{chats.message}}</p>
+      {% endfor %}
+      <hr>
+      <form method="POST">
+        {% csrf_token %}
+        <p></p>
+        <textarea name="message" rows="1" class="form-control"></textarea>
+        <p></p>
+        <a class="btn btn-warning glyphicon glyphicon-envelope"href="{% url 'chat:chat'%}"> Kyk vir Pos</a>
+        <button type="submit" class="btn btn-primary glyphicon glyphicon-send"> Stuur</button>
+        <p></p>
+      </form>
+    </div>
+  </div>
+  <script src="{% static "JS/chat.js" %}"></script>
+  {% endblock %}

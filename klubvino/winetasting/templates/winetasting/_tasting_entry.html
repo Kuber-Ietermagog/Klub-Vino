@@ -1,0 +1,12 @@
+{% for tasting in tasting_list.all %}
+<div class="calendar_entry col-lg-3">
+  <h3 class="calendar_name">Wynproe: {{ tasting.cultivar }}</h3>
+  <h3 id="tasting_location">Te: {{ tasting.location }}</h3>
+  <hr>
+  <h4 class="calendar_date">{{ tasting.date|date:"D d M Y" }}</h4>
+  <p id="tasting_created">Aangebied deur: {{ tasting.hosted_by }}</p>
+  <p></p>
+  <a class="btn btn-primary glyphicon glyphicon-glass calendar_button" href="{{tasting.id}}"> Gaan Proe</a>
+  {# <button onclick="window.location='{% url 'winetasting:tasting' pk=tasting.id %}'"type="button" class="btn btn-warning glyphicon glyphicon-plus event"> Nuwe</button> #}
+</div>
+{% endfor%}

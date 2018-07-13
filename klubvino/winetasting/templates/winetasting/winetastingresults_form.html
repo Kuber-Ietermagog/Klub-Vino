@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+  {% load staticfiles %}
+  {% block body_block %}
+  <div class="container">
+    <div class="jumbotron" id="myjumbotron">
+      <form enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        <p id="registrationform">Datum: {{form.relative_date}}</p>
+        <p id="registrationform">Kultivar: {{form.cultivar}}</p>
+        <p id="registrationform">Kode: {{form.wine_code_name}}</p>
+        <p id="registrationform">Kiekie: {{form.pics}}</p>
+        <p id="registrationform">Regte Naam: {{form.real_name}}</p>
+        <p id="registrationform">Kelder: {{form.cellar}}</p>
+        <p id="registrationform">Jaar: {{form.year}}</p>
+        <p id="registrationform">Prys: {{form.price}}</p>
+        <p id="registrationform">Punt: {{form.total}}</p>
+        <hr>
+        <input type="submit" class="btn btn-warning glyphicon glyphicon-plus" value=" Laai Wyn">
+      </form>
+      <p></p>
+      <button onclick="goBack()" class="btn btn-primary glyphicon glyphicon-step-backward"> Terug</button>
+    </div>
+  </div>
+  <script>
+    function goBack(){
+      window.history.back();
+    }
+  </script>
+  <script src="{% static "JS/tasting.js" %}"></script>
+  {% endblock %}

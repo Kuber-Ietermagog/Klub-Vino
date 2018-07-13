@@ -1,0 +1,12 @@
+{% for events in event_list.all %}
+<div class="calendar_entry col-lg-3">
+  <h3 class="calendar_name">{{ events.name }}</h3>
+  <hr>
+  <h4 class="calendar_date">{{ events.date|date:"D d M Y" }}</h4>
+  <p>
+    {{ events.description|truncatechars:30 }}
+  </p>
+  <button onclick="window.location='{% url 'event_calendar:event_detail' pk=events.id %}'" type="button" class="btn btn-primary calendar_button">Meer Inligting</button>
+  <p></p>
+</div>
+{% endfor%}

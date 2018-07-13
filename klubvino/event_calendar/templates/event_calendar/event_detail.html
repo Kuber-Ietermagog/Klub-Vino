@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+  {% load staticfiles %}
+  {% block body_block %}
+  <div class="container">
+    <div class="jumbotron" id="myjumbotron">
+      <h3 class="calendar_name">{{ entry_detail.name }}</h3>
+      <hr>
+      <h4 class="calendar_date">{{ entry_detail.date }}</h4>
+      <p id="calendar_description">{{ entry_detail.description }}</p>
+      <p id="calendar_created">Datum: {{ entry_detail.created }}</p>
+      <p id="calendar_created">Skrywer: {{entry_detail.created_by }}</p>
+      <p id="calendar_created">Dateer: {{entry_detail.last_update_by }}</p>
+      <button onclick="window.location='{% url 'event_calendar:events' %}'" id="event_button" class="btn btn-primary glyphicon glyphicon-step-backward" type="button"> Terug</button>
+      <a href="{% url 'event_calendar:update_event' pk=entry_detail.pk %}" id="event_button" class="btn btn-warning glyphicon glyphicon-edit" role="button"> Opdateer</a>
+      <a href="{% url 'event_calendar:delete_event' pk=entry_detail.pk %}" id="event_button" class="btn btn-danger glyphicon glyphicon-remove" role="button"> Verwyder</a>
+    </div>
+  </div>
+  <script src="{% static "JS/gebeure.js" %}"></script>
+  {% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+  {% load staticfiles %}
+  {% load widget_tweaks %}
+  {% block body_block %}
+  <div class="container">
+    <div class="jumbotron" id="myjumbotron">
+      <form enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        <p id="id_date">Datum: {{form.date}}</p>
+        <p id="registrationform">Kultivar: {{form.cultivar}}</p>
+        <p id="registrationform">Kubernaam: {{form.username}}</p>
+        <p id="registrationform">Kode: {{form.wine_code_name}}</p>
+        <p id="registrationform">Punt: {{form.points}}</p>
+        <p id="registrationform">Kommentaar:</p>
+        {{form.comments|add_class:"form-control"}}
+        <p></p>
+        <input type="submit" class="btn btn-warning glyphicon glyphicon-plus" value=" Laai Wyn">
+      </form>
+      <p></p>
+      <button onclick="goBack()" class="btn btn-primary glyphicon glyphicon-step-backward"> Terug</button>
+    </div>
+  </div>
+  <script>
+    function goBack(){
+      window.history.back();
+    }
+  </script>
+  <script>
+    $(document).ready(function(){
+      $("#id_date").hide();
+    });
+  </script>
+  <script src="{% static "JS/tasting.js" %}"></script>
+  {% endblock %}

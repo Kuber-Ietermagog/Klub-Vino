@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+  {% load staticfiles %}
+  {% block body_block %}
+  <div class="container">
+    <div class="jumbotron" id="myjumbotron">
+      <h2>Gebeure</h2>
+      <h2>Verwyder "{{evententry.name}}" op {{evententry.date}} van die kalender?:</h2>
+      <form enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        <input class="btn btn-danger" type="submit" value="Verwyder">
+        <a href="{% url 'event_calendar:events' %}" class="btn btn-primary glyphicon glyphicon-step-backward" role="button"> Kanselleer</a>
+      </form>
+    </div>
+  </div>
+  <script src="{% static "JS/gebeure.js" %}"></script>
+  {% endblock %}

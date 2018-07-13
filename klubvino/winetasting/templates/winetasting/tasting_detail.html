@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+  {% load staticfiles %}
+  {% block body_block %}
+  <div class="container">
+    <div class="jumbotron" id="myjumbotron">
+      <h3 class="calendar_name">{{ proe_goed.cultivar }}</h3>
+      <h4 class="calendar_date">{{ proe_goed.date }}</h4>
+      <h4 id="tasting_location">{{ proe_goed.location }}</h4>
+      <hr>
+      {% for wyne in proe_goed.proe_wyn.all %}
+        <button id="wyneproe_kode" class="btn btn-primary">{{wyne.wine_code_name}}</button>
+        <p id="registrationform">Kubernaam: {{wyne.username}}</p>
+        <p id="registrationform">Kommentaar: {{wyne.comments}}</p>
+        <p id="registrationform">Punt: {{wyne.points}}/10</p>
+        {% if user.username == wyne.username and not proe_goed.close_tasting %}
+          <a href="{% url 'winetasting:mystery_update' pk=wyne.pk %}" class="btn btn-warning glyphicon glyphicon-edit" role="button"> Opdateer</a>
+        {% endif %}
+        <p></p>
+        <hr>
+      {% endfor %}
+      {% if not proe_goed.close_tasting %}
+      <form action="{% url 'winetasting:mystery_wine' %}" method="GET">
+        <input type="hidden" value="{{ proe_goed.id }}" name="search">
+        <button class="btn btn-warning calendar_button" type="submit"><i class="glyphicon glyphicon-plus"> Nuwe Wyn</i></button>
+      </form>
+      {% endif %}
+      {% if result_btn %}
+        <form action="{% url 'winetasting:results' %}" method="GET">
+          <input type="hidden" value="{{ proe_goed.id }}" name="results">
+          <button class="btn btn-danger calendar_button" type="submit"><i class="glyphicon glyphicon-king"> Resultate</i></button>
+        </form>
+      {% endif %}
+      <a href="{% url 'winetasting:tasting' %}" class="btn btn-primary glyphicon glyphicon-step-backward" role="button"> Terug</a>
+    </div>
+  </div>
+  <script src="{% static "JS/tasting.js" %}"></script>
+  {% endblock %}

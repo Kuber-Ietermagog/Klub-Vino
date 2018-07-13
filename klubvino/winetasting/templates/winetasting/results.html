@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+  {% load staticfiles %}
+  {% load widget_tweaks %}
+  {% block body_block %}
+  <div class="container">
+    <div class="jumbotron" id="myjumbotron">
+      <h3 class="calendar_name">{{ result_header.cultivar }} - Resultate</h3>
+      <h4 class="calendar_date">{{ result_header.date }}</h4>
+      <h4 id="tasting_location">{{ result_header.location }}</h4>
+      <hr>
+      {% for wines in display_results %}
+        {% if forloop.counter0 == 0 %}
+          <button id="wyneproe_kode" class="btn-gold btn glyphicon glyphicon-king"> {{wines.wine_code_name}}</button>
+        {% endif %}
+        {% if forloop.counter0 == 1 %}
+          <button id="wyneproe_kode" class="btn-silver btn glyphicon glyphicon-queen"> {{wines.wine_code_name}}</button>
+        {% endif %}
+        {% if forloop.counter0 == 2 %}
+          <button id="wyneproe_kode" class="btn-bronze btn glyphicon glyphicon-tower"> {{wines.wine_code_name}}</button>
+        {% endif %}
+        {% if forloop.counter0 == 3 %}
+          <button id="wyneproe_kode" class="btn btn-green glyphicon glyphicon-knight"> {{wines.wine_code_name}}</button>
+        {% endif %}
+        {% if forloop.counter0 == 4 %}
+          <button id="wyneproe_kode" class="btn btn-blood glyphicon glyphicon-bishop"> {{wines.wine_code_name}}</button>
+        {% endif %}
+        {% if forloop.counter0 > 4 %}
+          <button id="wyneproe_kode" class="btn btn-info glyphicon glyphicon-pawn"> {{wines.wine_code_name}}</button>
+        {% endif %}
+        {% if result_header.close_tasting %}
+          {% if wines.pics%}
+            <p></p>
+            <img src="{{ wines.pics.url }}" alt="no image" width="200" height="300">
+          {% else %}
+            <p>Geen Kiekie!</p>
+          {% endif %}
+          <p></p>
+          <p id="registrationform">Wyn naam: {{wines.real_name}}</p>
+          <p id="registrationform">Kelder: {{wines.cellar}}</p>
+          <p id="registrationform">Jaar: {{wines.year}}</p>
+          <p id="registrationform">Prys: {{wines.price}}</p>
+        {% endif %}
+        <p id="results_point" class="calendar_name">Totale punt: {{wines.total}}/10</p>
+        {% if user.username == result_header.created_by and not result_header.close_tasting %}
+          <a href="{% url 'winetasting:result_update' pk=wines.pk %}" class="btn btn-warning glyphicon glyphicon-edit" role="button"> Opdateer</a>
+        {% endif %}
+        <hr>
+      {% endfor %}
+      <button onclick="goBack()" class="btn btn-primary glyphicon glyphicon-step-backward"> Terug</button>
+      {% if user.username == result_header.created_by %}
+        <p></p>
+        <a href="{% url 'winetasting:update_tasting' pk=result_header.pk %}" class="btn btn-danger glyphicon glyphicon-lock" role="button"> Sluit-af</a>
+      {% endif %}
+      <p></p>
+      {% if user.username == result_header.created_by and result_header.close_tasting %}
+      <form enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+          <input type="hidden" name="date" value="{{ result_header.date|date:"Y-m-d H:i:s" }}">
+          <button class="btn btn-green glyphicon glyphicon-save" type="submit"> Stoor resultate</button>
+      </form>
+      {% endif %}
+    </div>
+  </div>
+  <script>
+    function goBack(){
+      window.history.back();
+    }
+  </script>
+  <script src="{% static "JS/tasting.js" %}"></script>
+  {% endblock %}
